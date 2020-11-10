@@ -1,2 +1,2 @@
 /* exported data */
-var data = null
+var data = null;
