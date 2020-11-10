@@ -10,7 +10,7 @@ xhr.addEventListener('load', function () {
 
   var data = xhr.response;
   interval = setInterval(function () {
-    if (count > xhr.response.length) {
+    if (count === xhr.response.length) {
       count = 0;
     }
     document.querySelector('.first').classList.add('hidden');
