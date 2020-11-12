@@ -87,6 +87,7 @@ img:hover,
   max-width: 100%;
   display: flex;
   justify-content: space-evenly;
+  margin-top: 2rem;
 }
 
 .icon-text {
@@ -135,11 +136,6 @@ span:hover {
 }
 
 #cocktails-list {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  width: 100%;
-  justify-content: space-evenly;
   height: 20rem;
   padding-top: 1rem;
   overflow: auto;
@@ -156,15 +152,38 @@ span:hover {
 }
 
 ol {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   height: 20rem;
   list-style: none;
 }
 
-li {
-  text-align: center;
-}
-
 .sticky {
   position: fixed;
+  margin-bottom: 0;
+}
+
+.no-recipes {
+  position: absolute;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  float: left;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.recipe-link:hover {
+  color: blue;
+  transform: scale(1.2);
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.recipe-link:active {
+  transform: scale(0.8);
 }
