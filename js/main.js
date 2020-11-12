@@ -5,9 +5,13 @@ var $cocktails = document.querySelector('.cocktails-text');
 var data2 = null;
 var $firstImg = document.querySelector('.first');
 var drinkList = null;
+
+function random(min, max) { // gives random number between min-max (inclusive)  min = 0 (starting index)  max = allCocktails.length-1
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 xhr.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/popular.php');
 xhr.responseType = 'json';
-
 xhr.addEventListener('load', function () {
   var data = xhr.response;
   data2 = data;
@@ -64,13 +68,48 @@ document.addEventListener('click', function (event) {
     }, 2000);
   } else if (event.target.className === 'random-button' || event.target.id === 'random-icon' || event.target.className === 'icon-text random-text') {
     document.querySelector('#home-page').classList.add('hidden');
-
-    document.querySelector('#top-header').textContent = 'Random Cocktail';
+    document.querySelector('#random-ingredients').textContent = '';
     document.querySelector('#random-page').classList.remove('hidden');
     document.querySelector('#browse-page').classList.add('hidden');
     document.querySelector('.home-icon').classList.remove('hidden');
     document.querySelector('.browse').classList.remove('hidden');
     $recipeDiv.innerHTML = '';
+    var idx = random(0, allCocktails.drinks.length - 1);
+    document.querySelector('#random-name').innerHTML = '';
+    document.querySelector('#top-header').textContent = 'Random Cocktail # ' + [idx + 1] + '-' + allCocktails.drinks[idx].strDrink;
+    document.querySelector('#random-img-div').innerHTML = '';
+    document.querySelector('#random-list').textContent = '';
+
+    var $ingredients2 = document.createElement('h2');
+    $ingredients2.textContent = 'Ingredients: ';
+    document.querySelector('#random-ingredients').appendChild($ingredients2);
+
+    var $imgRandom = document.createElement('img');
+    $imgRandom.className = 'slideshow-img2';
+    $imgRandom.setAttribute('src', allCocktails.drinks[idx].strDrinkThumb);
+    document.querySelector('#random-img-div').appendChild($imgRandom);
+
+    for (var value in allCocktails.drinks[idx]) {
+      if (value.indexOf('strIngredient') > -1 && allCocktails.drinks[idx][value] !== null) {
+        var $p3 = document.createElement('p');
+        $p3.className = 'no-margin';
+        $p3.textContent = allCocktails.drinks[idx][value];
+        document.querySelector('#random-list').appendChild($p3);
+      }
+    }
+    var $instructions2 = document.createElement('h2');
+    $instructions2.className = 'instructions';
+    $instructions2.textContent = 'Instructions: ';
+    document.querySelector('#random-list').append($instructions2);
+    for (var randomIns in allCocktails.drinks[idx]) {
+      if (randomIns === 'strInstructions' && allCocktails.drinks[idx][randomIns] !== null) {
+        var $p4 = document.createElement('p');
+        $p4.className = 'no-margin';
+        $p4.textContent = allCocktails.drinks[idx][randomIns];
+        document.querySelector('#random-list').appendChild($p4);
+      }
+    }
+
   } else if (event.target.className === 'icons browse' || event.target.id === 'browse-icon') {
     $recipeDiv.innerHTML = '';
     document.querySelector('#top-header').textContent = 'Browse Cocktails';
@@ -169,16 +208,58 @@ document.addEventListener('click', function (event) {
         }
       }
     }
+  } else if (event.target.className === 'slideshow-img' || event.target.className === 'slideshow-img first' || event.target.className === 'cocktails-text') {
+
+    document.querySelector('#home-page').classList.add('hidden');
+    document.querySelector('#random-page').classList.add('hidden');
+    document.querySelector('#browse-page').classList.add('hidden');
+    document.querySelector('.browse').classList.remove('hidden');
+    document.querySelector('#recipe-page').classList.remove('hidden');
+    document.querySelector('.home-icon').classList.remove('hidden');
+    // sets header title to name of cocktail they clicked
+    var $chosenCocktail = document.querySelector('.cocktails-text');
+    document.querySelector('#top-header').textContent = $chosenCocktail.textContent;
+
+    var $ingredients3 = document.createElement('h3');
+    $ingredients3.textContent = 'Ingredients:';
+    document.querySelector('#recipe-img-div').appendChild($ingredients3);
+    var index = null;
+    for (var m = 0; m < allCocktails.drinks.length; m++) {
+      if (allCocktails.drinks[m].strDrink === $chosenCocktail.textContent) {
+        index = m;
+      }
+    }
+    for (var val2 in allCocktails.drinks[index]) {
+      if (val2.indexOf('strIngredient') > -1 && allCocktails.drinks[index][val2] !== null) {
+        var $p5 = document.createElement('p');
+        $p5.className = 'no-margin';
+        $p5.textContent = allCocktails.drinks[index][val2];
+        $ingredients3.appendChild($p5);
+      }
+    }
+    var $instructions3 = document.createElement('h2');
+    $instructions3.className = 'instructions';
+    $instructions3.textContent = 'Instructions: ';
+    $ingredients3.append($instructions3);
+
+    for (var val3 in allCocktails.drinks[index]) {
+      if (val3 === 'strInstructions' && allCocktails.drinks[index][val3] !== null) {
+        var $p6 = document.createElement('p');
+        $p6.className = 'no-margin';
+        $p6.textContent = allCocktails.drinks[index][val3];
+        $instructions3.appendChild($p6);
+      }
+    }
   }
 });
 
-// var allCocktails = null
-// var xhr3 = new XMLHttpRequest();
-// xhr3.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?c=Cocktail');
-// xhr3.responseType = 'json';
+var allCocktails = null;
+var xhr3 = new XMLHttpRequest();
+xhr3.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/search.php?s');
+xhr3.responseType = 'json';
 
-// xhr3.addEventListener('load', function () {
-//   var randomData = xhr3.response;
-//   allCocktails = randomData
-// })
-// xhr3.send();
+xhr3.addEventListener('load', function () {
+  var randomData = xhr3.response;
+  allCocktails = randomData;
+});
+xhr3.send();
