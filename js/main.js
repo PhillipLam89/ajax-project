@@ -64,15 +64,30 @@ document.addEventListener('click', function (event) {
     }, 2000);
   } else if (event.target.className === 'random-button' || event.target.id === 'random-icon' || event.target.className === 'icon-text random-text') {
     document.querySelector('#home-page').classList.add('hidden');
+
+    document.querySelector('#top-header').textContent = 'Random Cocktail';
     document.querySelector('#random-page').classList.remove('hidden');
     document.querySelector('#browse-page').classList.add('hidden');
-    document.querySelector('.browse').classList.add('hidden');
+    document.querySelector('.home-icon').classList.remove('hidden');
+    document.querySelector('.browse').classList.remove('hidden');
+    $recipeDiv.innerHTML = '';
   } else if (event.target.className === 'icons browse' || event.target.id === 'browse-icon') {
+    $recipeDiv.innerHTML = '';
+    document.querySelector('#top-header').textContent = 'Browse Cocktails';
     document.querySelector('#home-page').classList.add('hidden');
     document.querySelector('#random-page').classList.add('hidden');
     document.querySelector('#browse-page').classList.remove('hidden');
+    document.querySelector('.home-icon').classList.remove('hidden');
     document.querySelector('.browse').classList.add('hidden');
+
+  } else if (event.target.className === 'home-icon icons') {
     $recipeDiv.innerHTML = '';
+    document.querySelector('#browse-page').classList.add('hidden');
+    document.querySelector('#top-header').textContent = 'Famous Cocktails' + '  ' + ' Homepage';
+    document.querySelector('#home-page').classList.remove('hidden');
+    document.querySelector('.browse').classList.remove('hidden');
+    document.querySelector('#random-page').classList.add('hidden');
+    document.querySelector('.home-icon').classList.add('hidden');
   } else if (event.target.className === 'letters') {
     var $span = document.querySelectorAll('span');
     for (var i = 0; i < $span.length; i++) {
@@ -107,8 +122,8 @@ document.addEventListener('click', function (event) {
 
       for (var j = 0; j < drinkList.drinks.length; j++) {
         var $li2 = document.createElement('li');
-        $li.textContent = drinkList.drinks[j].strDrink;
-        $li.setAttribute('class', 'recipe-link');
+        $li2.textContent = drinkList.drinks[j].strDrink;
+        $li2.setAttribute('class', 'recipe-link');
         $ol.appendChild($li2);
       }
     });
@@ -123,25 +138,47 @@ document.addEventListener('click', function (event) {
     document.querySelector('#top-header').textContent = event.target.textContent;
 
     var $img = document.createElement('img');
+    var $ingredients = document.createElement('h2');
 
+    $ingredients.textContent = 'Ingredients: ';
     for (var k = 0; k < drinkList.drinks.length; k++) {
       if (drinkList.drinks[k].strDrink === event.target.textContent) {
         $img.setAttribute('src', drinkList.drinks[k].strDrinkThumb);
-        $img.className = 'slideshow-img';
+        $img.className = 'slideshow-img2';
         $recipeDiv.appendChild($img);
+        $recipeDiv.appendChild($ingredients);
+        for (var val in drinkList.drinks[k]) {
+          if (val.indexOf('strIngredient') > -1 && drinkList.drinks[k][val] !== null) { // returns all ingredients required, leaves out empty ones
+            var $p = document.createElement('p');
+            $p.className = 'no-margin';
+            $p.textContent = drinkList.drinks[k][val];
+            $recipeDiv.appendChild($p);
+          }
+        }
+        var $instructions = document.createElement('h2');
+        $instructions.className = 'instructions';
+        $instructions.textContent = 'Instructions: ';
+        $recipeDiv.append($instructions);
+        for (var ins in drinkList.drinks[k]) {
+          if (ins === 'strInstructions' && drinkList.drinks[k][ins] !== null) {
+            var $p2 = document.createElement('p');
+            $p2.className = 'no-margin';
+            $p2.textContent = drinkList.drinks[k][ins];
+            $instructions.appendChild($p2);
+          }
+        }
       }
     }
   }
 });
 
+// var allCocktails = null
 // var xhr3 = new XMLHttpRequest();
-
 // xhr3.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?c=Cocktail');
 // xhr3.responseType = 'json';
 
 // xhr3.addEventListener('load', function () {
-
 //   var randomData = xhr3.response;
-
+//   allCocktails = randomData
 // })
 // xhr3.send();
