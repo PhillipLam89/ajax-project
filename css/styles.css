@@ -33,6 +33,7 @@ nav {
 }
 
 img:hover,
+.icons:hover,
 .cocktails-text:hover {
   cursor: pointer;
 }

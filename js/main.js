@@ -60,9 +60,15 @@ document.addEventListener('click', function (event) {
       $cocktails.textContent = data2.drinks[count].strDrink;
       count++;
     }, 2000);
-  } else if (event.target.className === 'random-button') {
+  } else if (event.target.className === 'random-button' || event.target.id === 'random-icon' || event.target.className === 'icon-text random-text') {
     document.querySelector('#home-page').classList.add('hidden');
     document.querySelector('#random-page').classList.remove('hidden');
+    document.querySelector('#browse-page').classList.add('hidden');
+  } else if (event.target.className === 'icons browse' || event.target.id === 'browse-icon') {
+    document.querySelector('#home-page').classList.add('hidden');
+    document.querySelector('#random-page').classList.add('hidden');
+    document.querySelector('#browse-page').classList.remove('hidden');
+
   }
 
 });
