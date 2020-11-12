@@ -104,7 +104,12 @@ img:hover,
   color: blue;
 }
 
-.random {
-  transform: translateY(1.5rem);
+.random-button {
+  margin-top: 2rem;
   border-radius: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.random-button:active {
+  transform: translateY(0.5rem);
 }
