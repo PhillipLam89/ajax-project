@@ -5,6 +5,10 @@
   position: absolute;
 }
 
+.hidden {
+  display: none;
+}
+
 p {
   font-size: 18px;
   color: black;
@@ -32,46 +36,6 @@ nav {
   font-weight: 900;
 }
 
-img:hover,
-.icons:hover,
-.cocktails-text:hover {
-  cursor: pointer;
-}
-
-.hidden {
-  display: none;
-}
-
-.nav-bar {
-  width: 100%;
-  color: #eb5757;
-  font-weight: 900;
-  font-size: 30px;
-  font-style: italic;
-  padding-top: 1rem;
-  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.slideshow-img,
-.first {
-  width: 200px;
-  height: 200px;
-  border-radius: 10px;
-  margin-top: 2rem;
-}
-
-.bottom-nav {
-  position: absolute;
-  bottom: 0;
-  max-width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.icon-text {
-  margin-top: 0;
-}
-
 .right-arrow {
   position: absolute;
   right: 0;
@@ -90,9 +54,43 @@ img:hover,
   margin: 0 1rem;
 }
 
+img:hover,
+.icons:hover,
+.cocktails-text:hover,
 .right-arrow:hover,
 .left-arrow:hover {
   cursor: pointer;
+}
+
+.nav-bar {
+  width: 100%;
+  color: #eb5757;
+  font-weight: 900;
+  font-size: 30px;
+  font-style: italic;
+  padding-top: 1rem;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.slideshow-img,
+.first {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  margin-top: 2rem;
+  box-shadow: 4px 4px 4px  rgba(92, 32, 32, 0.5);
+}
+
+.bottom-nav {
+  position: absolute;
+  bottom: 0;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.icon-text {
+  margin-top: 0;
 }
 
 .right-arrow:active {
@@ -115,14 +113,58 @@ img:hover,
   transform: translateY(0.5rem);
 }
 
-.letters {
+a {
   text-decoration: none;
   color: red;
   font-size: 1.5rem;
   text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+span {
+  border: none;
+}
+
 span:active {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: green;
+}
+
+span:hover {
+  color: green;
+  font-weight: bolder;
+}
+
+#cocktails-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-evenly;
+  height: 20rem;
+  padding-top: 1rem;
+  overflow: auto;
+  word-wrap: break-word;
+  padding-left: 3rem;
+}
+
+.cocktails-letter {
+  margin-top: 0;
+  color: royalblue;
+  font-weight: 900;
+  font-size: 7rem;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+ol {
+  text-align: center;
+  height: 20rem;
+  list-style: none;
+}
+
+li {
+  text-align: center;
+}
+
+.sticky {
+  position: fixed;
 }
