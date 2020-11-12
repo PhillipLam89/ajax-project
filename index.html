@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap" rel="stylesheet">
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 <body>
   <div class="container">
@@ -15,13 +18,22 @@
       <nav class="nav-bar">
         FAMOUS COCKTAILS
       </nav>
-      <br>
+
     </header>
-    <main>
+    <main id="home-page">
+      <i class="fas fa-chevron-right right-arrow"></i>
+      <i class="fas fa-chevron-left left-arrow"></i>
       <h2>Most Popular Cocktails</h2>
-        <img src="https://www.thecocktaildb.com//images//media//drink//3z6xdi1589574603.jpg" alt="browse-logo" class="first">
+        <img class="slideshow-img first" src="https://www.thecocktaildb.com//images//media//drink//3z6xdi1589574603.jpg" alt="browse-logo">
       <div class="cocktails-text" >Margarita</div>
+      <div>
+        <button class="random-button">Random Cocktail !</button>
+      </div>
     </main>
+    <main id="random-page" class="hidden">
+      <h1>Random Page</h1>
+    </main>
+
     <nav class="nav-bar bottom-nav">
       <div class="icons">
         <img src="images/abc.png" alt="browse-logo" width="40px" height="40px">

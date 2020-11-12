@@ -70,3 +70,46 @@ img:hover,
 .icon-text {
   margin-top: 0;
 }
+
+.right-arrow {
+  position: absolute;
+  right: 0;
+  top: 45%;
+}
+
+.left-arrow {
+  position: absolute;
+  left: 0;
+  top: 45%;
+}
+
+.right-arrow,
+.left-arrow {
+  transform: scale(3);
+  margin: 0 1rem;
+}
+
+.right-arrow:hover,
+.left-arrow:hover {
+  cursor: pointer;
+}
+
+.right-arrow:active {
+  transform: translateX(0.5rem) scale(3);
+  color: blue;
+}
+
+.left-arrow:active {
+  transform: translateX(-0.5rem) scale(3);
+  color: blue;
+}
+
+.random-button {
+  margin-top: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.random-button:active {
+  transform: translateY(0.5rem);
+}
