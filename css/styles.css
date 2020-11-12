@@ -5,6 +5,10 @@
   position: absolute;
 }
 
+.hidden {
+  display: none;
+}
+
 p {
   font-size: 18px;
   color: black;
@@ -13,6 +17,7 @@ p {
 
 h2 {
   text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  margin: 0;
 }
 
 body {
@@ -30,45 +35,6 @@ nav {
 
 .cocktails-text {
   font-weight: 900;
-}
-
-img:hover,
-.cocktails-text:hover {
-  cursor: pointer;
-}
-
-.hidden {
-  display: none;
-}
-
-.nav-bar {
-  width: 100%;
-  color: #eb5757;
-  font-weight: 900;
-  font-size: 30px;
-  font-style: italic;
-  padding-top: 1rem;
-  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.slideshow-img,
-.first {
-  width: 200px;
-  height: 200px;
-  border-radius: 10px;
-  margin-top: 2rem;
-}
-
-.bottom-nav {
-  position: absolute;
-  bottom: 0;
-  max-width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.icon-text {
-  margin-top: 0;
 }
 
 .right-arrow {
@@ -89,9 +55,53 @@ img:hover,
   margin: 0 1rem;
 }
 
+img:hover,
+.icons:hover,
+.cocktails-text:hover,
 .right-arrow:hover,
 .left-arrow:hover {
   cursor: pointer;
+}
+
+.nav-bar {
+  width: 100%;
+  color: #eb5757;
+  font-weight: 900;
+  font-size: 30px;
+  font-style: italic;
+  padding-top: 1rem;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+div > p {
+  margin-top: 0;
+}
+
+.slideshow-img,
+.first {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  margin-top: 2rem;
+  box-shadow: 4px 4px 4px  rgba(92, 32, 32, 0.5);
+}
+
+.slideshow-img:active,
+.first:active {
+  transform: scale(0.9);
+}
+
+.bottom-nav {
+  position: absolute;
+  bottom: 0;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 2rem;
+}
+
+.icon-text {
+  margin-top: 0;
 }
 
 .right-arrow:active {
@@ -112,4 +122,96 @@ img:hover,
 
 .random-button:active {
   transform: translateY(0.5rem);
+}
+
+a {
+  text-decoration: none;
+  color: red;
+  font-size: 1.5rem;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+span {
+  border: none;
+}
+
+span:active {
+  font-size: 1.8rem;
+  color: green;
+}
+
+span:hover {
+  color: green;
+  font-weight: bolder;
+}
+
+#cocktails-list {
+  height: 20rem;
+  padding-top: 1rem;
+  overflow: auto;
+  word-wrap: break-word;
+  padding-left: 3rem;
+}
+
+.cocktails-letter {
+  margin-top: 0;
+  color: royalblue;
+  font-weight: 900;
+  font-size: 7rem;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+ol {
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  align-items: center;
+  height: 20rem;
+  list-style: none;
+}
+
+.sticky {
+  position: fixed;
+  margin-bottom: 0;
+}
+
+.no-recipes {
+  position: absolute;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  float: left;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.recipe-link:hover {
+  color: blue;
+  transform: scale(1.2);
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.recipe-link:active {
+  transform: scale(0.8);
+}
+
+.slideshow-img2 {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  margin-top: 1rem;
+  box-shadow: 4px 4px 4px  rgba(92, 32, 32, 0.5);
+}
+
+.no-margin {
+  margin: 1.5rem auto;
+  font-size: 1.2rem;
+  color: blueviolet;
+}
+
+#recipe-img-div {
+  overflow: hidden;
 }

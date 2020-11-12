@@ -15,8 +15,9 @@
 <body>
   <div class="container">
     <header>
-      <nav class="nav-bar">
-        FAMOUS COCKTAILS
+      <nav id="top-header" class="nav-bar">
+        FAMOUS COCKTAILS<br>
+        Home Page
       </nav>
 
     </header>
@@ -25,27 +26,58 @@
       <i class="fas fa-chevron-left left-arrow"></i>
       <h2>Most Popular Cocktails</h2>
         <img class="slideshow-img first" src="https://www.thecocktaildb.com//images//media//drink//3z6xdi1589574603.jpg" alt="browse-logo">
-      <div class="cocktails-text" >Margarita</div>
+      <div class="cocktails-text">Mojito</div>
       <div>
         <button class="random-button">Random Cocktail !</button>
       </div>
     </main>
     <main id="random-page" class="hidden">
-      <h1>Random Page</h1>
+      <h1></h1>
     </main>
+    <main id="browse-page" class="hidden">
+      <h1></h1>
+      <a href="#"><span class="letters">A</span></a>    <a href="#"><span class="letters">B</span></a>
+      <a href="#"><span class="letters">C</span></a>    <a href="#"><span class="letters">D</span></a>
+      <a href="#"><span class="letters">E</span></a>    <a href="#"><span class="letters">F</span></a>
+      <a href="#"><span class="letters">G</span></a>    <a href="#"><span class="letters">H</span></a>
+      <a href="#"><span class="letters">I</span></a>    <a href="#"><span class="letters">J</span></a>
+      <a href="#"><span class="letters">K</span></a>    <a href="#"><span class="letters">L</span></a>
+      <a href="#"><span class="letters">M</span></a>    <br><br>
 
+      <a href="#"><span class="letters">N</span></a>    <a href="#"><span class="letters">O</span></a>
+      <a href="#"><span class="letters">P</span></a>    <a href="#"><span class="letters">Q</span></a>
+      <a href="#"><span class="letters">R</span></a>    <a href="#"><span class="letters">S</span></a>
+      <a href="#"><span class="letters">T</span></a>    <a href="#"><span class="letters">U</span></a>
+      <a href="#"><span class="letters">V</span></a>    <a href="#"><span class="letters">W</span></a>
+      <a href="#"><span class="letters">X</span></a>    <a href="#"><span class="letters">Y</span></a>
+      <a href="#"><span class="letters">Z</span></a>
+      <div id="cocktails-list">
+        <h1 class="cocktails-letter"></h1>
+        <div id="recipe-list">
+
+        </div>
+      </div>
+    </main>
+    <main id="recipe-page" class="hidden">
+      <div id="recipe-img-div">
+      </div>
+    </main>
     <nav class="nav-bar bottom-nav">
-      <div class="icons">
-        <img src="images/abc.png" alt="browse-logo" width="40px" height="40px">
-        <p class="icon-text">Browse</p>
+      <div class="home-icon icons hidden" id="home-icon">
+        <img class= "home-icon icons" src="images/home.png" alt="home-icon" width="40px" height="40px">
+        <p  class="home-icon icons">Home</p>
+      </div>
+      <div class="icons browse">
+        <img src="images/abc.png" alt="browse-icon" width="40px" height="40px" class="icons browse">
+        <p id="browse-icon" class="icon-text">Browse</p>
       </div>
       <div class="icons">
         <img src="images/liqour.svg" alt="browse-logo" width="40px" height="40px">
-        <p class="icon-text">Info</p>
+        <p id="info-icon" class="icon-text">Info</p>
       </div>
       <div class="icons">
-        <img src="images/random.png" alt="browse-logo" width="40px" height="40px">
-        <p class="icon-text">Random</p>
+        <img id="random-icon" src="images/random.png" alt="browse-logo" width="40px" height="40px">
+        <p class="icon-text random-text">Random</p>
       </div>
     </nav>
   </div>
