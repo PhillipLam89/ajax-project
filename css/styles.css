@@ -82,20 +82,6 @@ div > p {
   margin-top: 0;
 }
 
-/* .slide-left {
-  transform: translateX(2rem);
-  width: 315px;
-  border: none;
-  margin: 0;
-  padding: 0;
-  animation: slideLeft 5s infinite;
-}
-
-@keyframes slideLeft {
-  from { opacity: 1; }
-  to { opacity: 0; }
-} */
-
 .slideshow-img,
 .first {
   width: 200px;
