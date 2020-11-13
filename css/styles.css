@@ -2,7 +2,7 @@
   width: 375px;
   height: 667px;
   border: 3px solid brown;
-  position: absolute;
+  position: relative;
 }
 
 .hidden {
@@ -15,7 +15,8 @@ p {
   font-weight: 800;
 }
 
-h2 {
+h2,
+h3 {
   text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   margin: 0;
 }
@@ -67,7 +68,7 @@ img:hover,
   width: 100%;
   color: #eb5757;
   font-weight: 900;
-  font-size: 30px;
+  font-size: 25px;
   font-style: italic;
   padding-top: 1rem;
   text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -97,7 +98,8 @@ div > p {
   max-width: 100%;
   display: flex;
   justify-content: space-evenly;
-  margin-top: 2rem;
+  margin: 0;
+  padding-top: 0.5rem;
 }
 
 .icon-text {
@@ -207,11 +209,22 @@ ol {
 }
 
 .no-margin {
-  margin: 1.5rem auto;
-  font-size: 1.2rem;
+  margin: 0 auto;
+  font-size: 0.8rem;
   color: blueviolet;
 }
 
 #recipe-img-div {
-  overflow: hidden;
+  height: auto;
+  word-wrap: break-word;
+  overflow: auto;
+}
+
+.icons:active {
+  transform: scale(0.8);
+}
+
+#random-page {
+  word-wrap: break-word;
+  overflow: auto;
 }
