@@ -76,6 +76,25 @@ function showChosenRecipePage() {
   $dataPage.classList.add('hidden');
 }
 
+function showInfoPage() {
+  $topHeader.textContent = event.target.textContent + ' Information';
+  $infoPage.classList.add('hidden');
+  $dataPage.classList.remove('hidden');
+
+  var xhr4 = new XMLHttpRequest();
+  xhr4.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/search.php?i=' + event.target.textContent);
+  xhr4.responseType = 'json';
+  xhr4.addEventListener('load', function () {
+    var data = xhr4.response;
+    var $liquorInfoText = document.createElement('li');
+    $liquorInfoText.className = 'liquor-info-text';
+    $liquorInfoText.textContent = data.ingredients[0].strDescription;
+    document.querySelector('.information-list').appendChild($liquorInfoText);
+
+  });
+  xhr4.send();
+}
+
 xhr.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/popular.php');
 xhr.responseType = 'json';
 xhr.addEventListener('load', function () {
@@ -308,22 +327,7 @@ document.addEventListener('click', function (event) {
     $recipePage.classList.add('hidden');
     document.querySelector('.information-list').textContent = '';
   } else if (event.target.className === 'liquors') {
-    $topHeader.textContent = event.target.textContent + ' Information';
-    $infoPage.classList.add('hidden');
-    $dataPage.classList.remove('hidden');
-
-    var xhr4 = new XMLHttpRequest();
-    xhr4.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/search.php?i=' + event.target.textContent);
-    xhr4.responseType = 'json';
-    xhr4.addEventListener('load', function () {
-      var data = xhr4.response;
-      var $liquorInfoText = document.createElement('li');
-      $liquorInfoText.className = 'liquor-info-text';
-      $liquorInfoText.textContent = data.ingredients[0].strDescription;
-      document.querySelector('.information-list').appendChild($liquorInfoText);
-
-    });
-    xhr4.send();
+    showInfoPage();
   }
 });
 
