@@ -76,7 +76,7 @@ function showChosenRecipePage() {
   $dataPage.classList.add('hidden');
 }
 
-function showInfoPage() {
+function showInfoPage(event) {
   $topHeader.textContent = event.target.textContent + ' Information';
   $infoPage.classList.add('hidden');
   $dataPage.classList.remove('hidden');
@@ -327,7 +327,7 @@ document.addEventListener('click', function (event) {
     $recipePage.classList.add('hidden');
     document.querySelector('.information-list').textContent = '';
   } else if (event.target.className === 'liquors') {
-    showInfoPage();
+    showInfoPage(event);
   }
 });
 

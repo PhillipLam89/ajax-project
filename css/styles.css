@@ -44,12 +44,14 @@ nav {
   position: absolute;
   right: 0;
   top: 45%;
+  margin: 0;
 }
 
 .left-arrow {
   position: absolute;
   left: 0;
   top: 45%;
+  margin: 0;
 }
 
 .right-arrow,
@@ -81,13 +83,17 @@ div > p {
 }
 
 .slide-left {
-  position: relative;
+  transform: translateX(2rem);
+  width: 315px;
+  border: none;
+  margin: 0;
+  padding: 0;
   animation: slideLeft 5s infinite;
 }
 
 @keyframes slideLeft {
   from { opacity: 1; }
-  to { opacity: 0.05; }
+  to { opacity: 0; }
 }
 
 .slideshow-img,
