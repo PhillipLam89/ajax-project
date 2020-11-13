@@ -16,10 +16,52 @@ var $randomImageDiv = document.querySelector('#random-img-div');
 var $randomList = document.querySelector('#random-list');
 var $cocktailsLetter = document.querySelector('.cocktails-letter');
 var $recipePage = document.querySelector('#recipe-page');
-
+var $recipeImgDiv = document.querySelector('#recipe-img-div');
 var $randomName = document.querySelector('#random-name');
+
 function random(min, max) { // gives random number between min-max (inclusive)  min = 0 (starting index)  max = allCocktails.length-1
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function showRandomPage() {
+  $homepage.classList.add('hidden');
+  $randomIngredients.textContent = '';
+  $randomPage.classList.remove('hidden');
+  $browsePage.classList.add('hidden');
+  $homeIcon.classList.remove('hidden');
+}
+
+function showBrowsePage() {
+  $recipeDiv.innerHTML = '';
+  $topHeader.textContent = 'Browse Cocktails';
+  $homepage.classList.add('hidden');
+  $randomPage.classList.add('hidden');
+  $browsePage.classList.remove('hidden');
+  $homeIcon.classList.remove('hidden');
+}
+
+function showHomePage() {
+  $recipeDiv.innerHTML = '';
+  $browsePage.classList.add('hidden');
+  $topHeader.textContent = 'Famous Cocktails' + '  ' + ' Homepage';
+  $homepage.classList.remove('hidden');
+  $randomPage.classList.add('hidden');
+  $homeIcon.classList.add('hidden');
+}
+
+function showRecipePage() {
+  $homepage.classList.add('hidden');
+  $randomPage.classList.add('hidden');
+  $browsePage.classList.add('hidden');
+  $recipePage.classList.remove('hidden');
+}
+
+function showChosenRecipePage() {
+  $homepage.classList.add('hidden');
+  $randomPage.classList.add('hidden');
+  $browsePage.classList.add('hidden');
+  $recipePage.classList.remove('hidden');
+  $homeIcon.classList.remove('hidden');
 }
 
 xhr.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/popular.php');
@@ -79,11 +121,7 @@ document.addEventListener('click', function (event) {
       count++;
     }, 2000);
   } else if (event.target.className === 'random-button' || event.target.id === 'random-icon' || event.target.className === 'icon-text random-text') {
-    $homepage.classList.add('hidden');
-    $randomIngredients.textContent = '';
-    $randomPage.classList.remove('hidden');
-    $browsePage.classList.add('hidden');
-    $homeIcon.classList.remove('hidden');
+    showRandomPage();
 
     $recipeDiv.innerHTML = '';
     var idx = random(0, allCocktails.drinks.length - 1);
@@ -123,20 +161,10 @@ document.addEventListener('click', function (event) {
     }
 
   } else if (event.target.className === 'icons browse' || event.target.id === 'browse-icon') {
-    $recipeDiv.innerHTML = '';
-    $topHeader.textContent = 'Browse Cocktails';
-    $homepage.classList.add('hidden');
-    $randomPage.classList.add('hidden');
-    $browsePage.classList.remove('hidden');
-    $homeIcon.classList.remove('hidden');
+    showBrowsePage();
 
   } else if (event.target.className === 'home-icon icons') {
-    $recipeDiv.innerHTML = '';
-    $browsePage.classList.add('hidden');
-    $topHeader.textContent = 'Famous Cocktails' + '  ' + ' Homepage';
-    $homepage.classList.remove('hidden');
-    $randomPage.classList.add('hidden');
-    $homeIcon.classList.add('hidden');
+    showHomePage();
   } else if (event.target.className === 'letters') {
     var $span = document.querySelectorAll('span');
     for (var i = 0; i < $span.length; i++) {
@@ -179,13 +207,10 @@ document.addEventListener('click', function (event) {
 
     xhr2.send();
   } else if (event.target.className === 'recipe-link') {
-    $homepage.classList.add('hidden');
-    $randomPage.classList.add('hidden');
-    $browsePage.classList.add('hidden');
 
-    $recipePage.classList.remove('hidden');
+    showRecipePage();
+
     $topHeader.textContent = event.target.textContent;
-
     var $img = document.createElement('img');
     var $ingredients = document.createElement('h2');
 
@@ -219,12 +244,7 @@ document.addEventListener('click', function (event) {
       }
     }
   } else if (event.target.className === 'slideshow-img' || event.target.className === 'slideshow-img first' || event.target.className === 'cocktails-text') {
-
-    $homepage.classList.add('hidden');
-    $randomPage.classList.add('hidden');
-    $browsePage.classList.add('hidden');
-    $recipePage.classList.remove('hidden');
-    $homeIcon.classList.remove('hidden');
+    showChosenRecipePage();
     // sets header title to name of cocktail they clicked
     var $chosenCocktail = document.querySelector('.cocktails-text');
     $topHeader.textContent = $chosenCocktail.textContent;
@@ -235,15 +255,14 @@ document.addEventListener('click', function (event) {
         index = m;
       }
     }
-
     var $chosenImage = document.createElement('img');
     $chosenImage.className = 'slideshow-img2';
     $chosenImage.setAttribute('src', allCocktails.drinks[index].strDrinkThumb);
-    document.querySelector('#recipe-img-div').appendChild($chosenImage);
+    $recipeImgDiv.appendChild($chosenImage);
 
     var $ingredients3 = document.createElement('h3');
     $ingredients3.textContent = 'Ingredients:';
-    document.querySelector('#recipe-img-div').appendChild($ingredients3);
+    $recipeImgDiv.appendChild($ingredients3);
 
     for (var val2 in allCocktails.drinks[index]) {
       if (val2.indexOf('strIngredient') > -1 && allCocktails.drinks[index][val2] !== null) {
