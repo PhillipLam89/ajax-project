@@ -18,6 +18,8 @@ var $cocktailsLetter = document.querySelector('.cocktails-letter');
 var $recipePage = document.querySelector('#recipe-page');
 var $recipeImgDiv = document.querySelector('#recipe-img-div');
 var $randomName = document.querySelector('#random-name');
+var $infoPage = document.querySelector('#info-page');
+var $dataPage = document.querySelector('#data-page');
 
 function random(min, max) { // gives random number between min-max (inclusive)  min = 0 (starting index)  max = allCocktails.length-1
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -29,6 +31,8 @@ function showRandomPage() {
   $randomPage.classList.remove('hidden');
   $browsePage.classList.add('hidden');
   $homeIcon.classList.remove('hidden');
+  $infoPage.classList.add('hidden');
+  $dataPage.classList.add('hidden');
 }
 
 function showBrowsePage() {
@@ -38,6 +42,8 @@ function showBrowsePage() {
   $randomPage.classList.add('hidden');
   $browsePage.classList.remove('hidden');
   $homeIcon.classList.remove('hidden');
+  $infoPage.classList.add('hidden');
+  $dataPage.classList.add('hidden');
 }
 
 function showHomePage() {
@@ -47,6 +53,8 @@ function showHomePage() {
   $homepage.classList.remove('hidden');
   $randomPage.classList.add('hidden');
   $homeIcon.classList.add('hidden');
+  $infoPage.classList.add('hidden');
+  $dataPage.classList.add('hidden');
 }
 
 function showRecipePage() {
@@ -54,6 +62,8 @@ function showRecipePage() {
   $randomPage.classList.add('hidden');
   $browsePage.classList.add('hidden');
   $recipePage.classList.remove('hidden');
+  $infoPage.classList.add('hidden');
+  $dataPage.classList.add('hidden');
 }
 
 function showChosenRecipePage() {
@@ -62,6 +72,8 @@ function showChosenRecipePage() {
   $browsePage.classList.add('hidden');
   $recipePage.classList.remove('hidden');
   $homeIcon.classList.remove('hidden');
+  $infoPage.classList.add('hidden');
+  $dataPage.classList.add('hidden');
 }
 
 xhr.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/popular.php');
@@ -78,7 +90,7 @@ xhr.addEventListener('load', function () {
     $firstImg.className = 'slideshow-img';
 
     count++;
-  }, 2000);
+  }, 4800);
 });
 
 var $recipeDiv = document.querySelector('#recipe-img-div');
@@ -285,6 +297,33 @@ document.addEventListener('click', function (event) {
         $instructions3.appendChild($p6);
       }
     }
+  } else if (event.target.id === 'info-icon' || event.target.id === 'info-img') {
+    $dataPage.classList.add('hidden');
+    $recipeDiv.innerHTML = '';
+    $topHeader.textContent = 'Liquor List';
+    $homepage.classList.add('hidden');
+    $randomPage.classList.add('hidden');
+    $infoPage.classList.remove('hidden');
+    $browsePage.classList.add('hidden');
+    $recipePage.classList.add('hidden');
+    document.querySelector('.information-list').textContent = '';
+  } else if (event.target.className === 'liquors') {
+    $topHeader.textContent = event.target.textContent + ' Information';
+    $infoPage.classList.add('hidden');
+    $dataPage.classList.remove('hidden');
+
+    var xhr4 = new XMLHttpRequest();
+    xhr4.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/search.php?i=' + event.target.textContent);
+    xhr4.responseType = 'json';
+    xhr4.addEventListener('load', function () {
+      var data = xhr4.response;
+      var $liquorInfoText = document.createElement('li');
+      $liquorInfoText.className = 'liquor-info-text';
+      $liquorInfoText.textContent = data.ingredients[0].strDescription;
+      document.querySelector('.information-list').appendChild($liquorInfoText);
+
+    });
+    xhr4.send();
   }
 });
 
