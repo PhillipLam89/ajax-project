@@ -136,7 +136,7 @@ document.addEventListener('click', function (event) {
     event.target.style = 'border-bottom: 3px solid black';
 
     var xhr2 = new XMLHttpRequest();
-    xhr2.open('GET', 'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=' + event.target.textContent);
+    xhr2.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/search.php?f=' + event.target.textContent);
     xhr2.responseType = 'json';
     xhr2.addEventListener('load', function () {
       drinkList = xhr2.response;
@@ -220,15 +220,22 @@ document.addEventListener('click', function (event) {
     var $chosenCocktail = document.querySelector('.cocktails-text');
     document.querySelector('#top-header').textContent = $chosenCocktail.textContent;
 
-    var $ingredients3 = document.createElement('h3');
-    $ingredients3.textContent = 'Ingredients:';
-    document.querySelector('#recipe-img-div').appendChild($ingredients3);
     var index = null;
     for (var m = 0; m < allCocktails.drinks.length; m++) {
       if (allCocktails.drinks[m].strDrink === $chosenCocktail.textContent) {
         index = m;
       }
     }
+
+    var $chosenImage = document.createElement('img');
+    $chosenImage.className = 'slideshow-img2';
+    $chosenImage.setAttribute('src', allCocktails.drinks[index].strDrinkThumb);
+    document.querySelector('#recipe-img-div').appendChild($chosenImage);
+
+    var $ingredients3 = document.createElement('h3');
+    $ingredients3.textContent = 'Ingredients:';
+    document.querySelector('#recipe-img-div').appendChild($ingredients3);
+
     for (var val2 in allCocktails.drinks[index]) {
       if (val2.indexOf('strIngredient') > -1 && allCocktails.drinks[index][val2] !== null) {
         var $p5 = document.createElement('p');
