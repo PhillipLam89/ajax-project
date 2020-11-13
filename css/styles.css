@@ -82,7 +82,7 @@ div > p {
   margin-top: 0;
 }
 
-.slide-left {
+/* .slide-left {
   transform: translateX(2rem);
   width: 315px;
   border: none;
@@ -94,7 +94,7 @@ div > p {
 @keyframes slideLeft {
   from { opacity: 1; }
   to { opacity: 0; }
-}
+} */
 
 .slideshow-img,
 .first {
