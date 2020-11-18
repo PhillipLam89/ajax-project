@@ -5,7 +5,7 @@ var $cocktails = document.querySelector('.cocktails-text');
 var data2 = null;
 var $firstImg = document.querySelector('.first');
 var drinkList = null;
-
+var allCocktails = null;
 var $homepage = document.querySelector('#home-page');
 var $randomIngredients = document.querySelector('#random-ingredients');
 var $randomPage = document.querySelector('#random-page');
@@ -84,7 +84,22 @@ function showInfoPage(event) {
   var xhr4 = new XMLHttpRequest();
   xhr4.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/search.php?i=' + event.target.textContent);
   xhr4.responseType = 'json';
+
+  xhr4.addEventListener('error', function () {
+    $errorhandler.classList.remove('hidden');
+    $containerStatus.classList.add('hidden');
+    $errorMsg.textContent = 'No Internet Connection Detected.';
+
+  });
+
   xhr4.addEventListener('load', function () {
+    if (xhr4.status !== 200) {
+      $errorhandler.classList.remove('hidden');
+      $containerStatus.classList.add('hidden');
+      $errorMsg.textContent = 'No data received from server.';
+      return;
+    }
+
     var data = xhr4.response;
     var $liquorInfoText = document.createElement('li');
     $liquorInfoText.className = 'liquor-info-text';
@@ -94,10 +109,28 @@ function showInfoPage(event) {
   });
   xhr4.send();
 }
-
+var $errorhandler = document.querySelector('.error-handler');
+var $containerStatus = document.querySelector('.container');
+var $errorMsg = document.querySelector('.error-msg');
 xhr.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/popular.php');
 xhr.responseType = 'json';
+
+xhr.addEventListener('error', function () {
+  $errorhandler.classList.remove('hidden');
+  $containerStatus.classList.add('hidden');
+  $errorMsg.textContent = 'No Internet Connection Detected.';
+
+});
+
 xhr.addEventListener('load', function () {
+
+  if (xhr.status !== 200) {
+    $errorhandler.classList.remove('hidden');
+    $containerStatus.classList.add('hidden');
+    $errorMsg.textContent = 'No data received from server.';
+    return;
+  }
+
   var data = xhr.response;
   data2 = data;
   interval = setInterval(function () {
@@ -109,7 +142,7 @@ xhr.addEventListener('load', function () {
     $firstImg.className = 'slideshow-img';
 
     count++;
-  }, 4800);
+  }, 1800);
 });
 
 var $recipeDiv = document.querySelector('#recipe-img-div');
@@ -152,6 +185,25 @@ document.addEventListener('click', function (event) {
       count++;
     }, 2000);
   } else if (event.target.className === 'random-button' || event.target.id === 'random-icon' || event.target.className === 'icon-text random-text') {
+
+    xhr3.addEventListener('error', function () {
+      $errorhandler.classList.remove('hidden');
+      $containerStatus.classList.add('hidden');
+      $errorMsg.textContent = 'No Internet Connection Detected.';
+
+    });
+    xhr3.addEventListener('load', function () {
+      if (xhr3.status !== 200) {
+        $errorhandler.classList.remove('hidden');
+        $containerStatus.classList.add('hidden');
+        $errorMsg.textContent = 'No data received from server.';
+        return;
+      }
+      var randomData = xhr3.response;
+      allCocktails = randomData;
+      xhr3.send();
+    });
+
     showRandomPage();
 
     $recipeDiv.innerHTML = '';
@@ -207,9 +259,22 @@ document.addEventListener('click', function (event) {
     var xhr2 = new XMLHttpRequest();
     xhr2.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/search.php?f=' + event.target.textContent);
     xhr2.responseType = 'json';
-    xhr2.addEventListener('load', function () {
-      drinkList = xhr2.response;
 
+    xhr2.addEventListener('error', function () {
+      $errorhandler.classList.remove('hidden');
+      $containerStatus.classList.add('hidden');
+      $errorMsg.textContent = 'No Internet Connection Detected.';
+
+    });
+    xhr2.addEventListener('load', function () {
+      if (xhr.status !== 200) {
+        $errorhandler.classList.remove('hidden');
+        $containerStatus.classList.add('hidden');
+        $errorMsg.textContent = 'No data received from server.';
+        return;
+      }
+
+      drinkList = xhr2.response;
       $cocktailsLetter.textContent = event.target.textContent;
       $cocktailsLetter.setAttribute('class', 'cocktails-letter');
       $cocktailsLetter.classList.add('sticky');
@@ -331,13 +396,24 @@ document.addEventListener('click', function (event) {
   }
 });
 
-var allCocktails = null;
 var xhr3 = new XMLHttpRequest();
 xhr3.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/search.php?s');
 xhr3.responseType = 'json';
+xhr.addEventListener('error', function () {
+  $errorhandler.classList.remove('hidden');
+  $containerStatus.classList.add('hidden');
+  $errorMsg.textContent = 'No Internet Connection Detected.';
 
+});
 xhr3.addEventListener('load', function () {
+  if (xhr3.status !== 200) {
+    $errorhandler.classList.remove('hidden');
+    $containerStatus.classList.add('hidden');
+    $errorMsg.textContent = 'No data received from server.';
+    return;
+  }
   var randomData = xhr3.response;
   allCocktails = randomData;
+
 });
 xhr3.send();
