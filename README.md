@@ -1,9 +1,10 @@
 # Live Cocktail Reciped App
+A dynamic HTML, CSS, and JavaScript project that allows user to browse the world's most popular cocktails, their recipes, and historical background.
 
-## 💰 Motivation
+## Application Demo
+Click the following link to try it out live https://philliplam89.github.io/ajax-project/
 
- User can choose a random cocktail or click on the current rotating image on the home page to get a recipe
-## 📐 Plan
+##
 
  User can click a button which leads to a random cocktail recipe
 
