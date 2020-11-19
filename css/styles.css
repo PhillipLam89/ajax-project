@@ -1,6 +1,5 @@
+
 .container {
-  width: 375px;
-  height: 667px;
   position: relative;
   border: 1px solid red;
   background-color: rgb(248, 245, 245);
@@ -17,6 +16,10 @@ p {
   font-weight: 800;
 }
 
+h2 {
+  font-size: 18px;
+}
+
 h2,
 h3 {
   text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -31,7 +34,7 @@ body {
   font-family: 'Space Grotesk', sans-serif;
 }
 
-nav {
+footer {
   background-color: lightblue;
   height: 6rem;
 }
@@ -56,7 +59,7 @@ nav {
 
 .right-arrow,
 .left-arrow {
-  transform: scale(3);
+  transform: scale(1.5);
   margin: 0 1rem;
 }
 
@@ -70,9 +73,9 @@ img:hover,
 
 .nav-bar {
   width: 100%;
-  color: #eb5757;
+  color: royalblue;
   font-weight: 900;
-  font-size: 25px;
+  font-size: 20px;
   font-style: italic;
   padding-top: 1rem;
   text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -84,10 +87,7 @@ div > p {
 
 .slideshow-img,
 .first {
-  width: 200px;
-  height: 200px;
   border-radius: 10px;
-  margin-top: 2rem;
   box-shadow: 4px 4px 4px  rgba(92, 32, 32, 0.5);
 }
 
@@ -173,9 +173,11 @@ ol {
   justify-content: right;
   align-items: center;
   list-style: none;
+  height: 100%;
 }
 
 .sticky {
+  text-align: center;
   position: fixed;
   margin-bottom: 0;
 }
@@ -214,31 +216,24 @@ ol {
   margin: 0 auto;
   font-size: 0.8rem;
   color: blueviolet;
-}
-
-#recipe-img-div,
-#random-page,
-#random-list {
-  word-wrap: break-word;
-  overflow: auto;
-  max-height: 27rem;
+  overflow-y: scroll;
 }
 
 .icons:active {
   transform: scale(0.8);
 }
 
-#info-page > h3 {
+#info-page h3 {
   margin: 1rem auto;
 }
 
-#info-page > h3:hover {
+#info-page h3:hover {
   cursor: pointer;
   color: blue;
   transform: scale(1.2);
 }
 
-#info-page > h3:active {
+#info-page h3:active {
   color: red;
   transform: scale(1);
 }
@@ -248,12 +243,11 @@ ol {
   margin: 0.5rem 0;
   word-wrap: normal;
   overflow-y: scroll;
-  max-height: 28rem;
 }
 
 .liquor-info-text {
   color: black;
-  font-size: 0.7rem;
+  font-size: 1rem;
   line-height: 2rem;
   font-weight: 800;
 }

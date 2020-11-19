@@ -1,0 +1,269 @@
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 320px) {
+  .container {
+    width: 320px;
+    min-height: 568px;
+  }
+
+  #recipe-img-div,
+  #info-page,
+  .liquor-info-text,
+  #random-page,
+  #browse-page,
+  #random-list,
+  .information-list,
+  .no-margin {
+    word-wrap: break-word;
+    overflow: auto;
+    max-height: 25rem;
+  }
+
+  .slideshow-img {
+    margin-top: 2rem;
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media screen and (min-width: 375px) and (min-height: 667px) {
+  .container {
+    width: 375px;
+    min-height: 667px;
+  }
+
+  .slideshow-img {
+    margin-top: 2rem;
+    transform: scale(1);
+  }
+
+  #recipe-img-div,
+  #info-page,
+  .liquor-info-text,
+  #random-page,
+  #browse-page,
+  #random-list,
+  .information-list,
+  .no-margin {
+    word-wrap: break-word;
+    overflow: auto;
+    max-height: 30rem;
+  }
+}
+
+@media screen and (min-width: 375px) and (min-height: 812px) {
+  .container {
+    width: 375px;
+    min-height: 812px;
+  }
+
+  .right-arrow {
+    right: 0;
+    top: 35% !important;
+  }
+
+  .left-arrow {
+    left: 0;
+    top: 35% !important;
+  }
+
+  #recipe-img-div,
+  #info-page,
+  .liquor-info-text,
+  #random-page,
+  #browse-page,
+  #random-list,
+  .information-list {
+    word-wrap: break-word;
+    overflow: auto;
+    max-height: 30rem;
+  }
+
+  .home-page-content-container {
+    margin-top: 4rem;
+  }
+
+  .liquor-info-text {
+    max-height: 40rem;
+  }
+}
+
+@media screen and (min-width: 568px) {
+  .container {
+    width: 568px;
+    min-height: 320px;
+  }
+
+  .slideshow-img {
+    width: 80px;
+    height: 80px;
+    margin-top: 0.2rem;
+  }
+
+  #recipe-img-div,
+  #info-page,
+  .liquor-info-text,
+  #random-page,
+  #browse-page,
+  #random-list,
+  .information-list {
+    max-height: 10rem;
+  }
+}
+
+@media screen and (min-width: 667px) and (min-height: 375px) {
+  .container {
+    margin-top: 4rem;
+    width: 667px;
+    min-height: 375px;
+  }
+
+  #recipe-img-div,
+  #info-page,
+  .liquor-info-text,
+  #random-page,
+  #browse-page,
+  #random-list,
+  .information-list,
+  .no-margin {
+    word-wrap: break-word;
+    overflow: auto;
+    max-height: 14rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 768px;
+    min-height: 1024px;
+    font-size: 40px;
+  }
+
+  .slideshow-img {
+    margin-top: 2rem;
+    width: 400px;
+    height: 400px;
+  }
+
+  #recipe-img-div,
+  #info-page,
+  .liquor-info-text,
+  #random-page,
+  #browse-page,
+  #random-list,
+  .information-list {
+    max-height: 45rem;
+    overflow-y: scroll;
+  }
+
+  .no-margin {
+    margin: 0 auto;
+    font-size: 1.8rem;
+    color: blueviolet;
+  }
+}
+
+@media screen and (min-width: 812px) {
+  .container {
+    width: 812px;
+    min-height: 375px;
+  }
+
+  #recipe-img-div,
+  #info-page,
+  .liquor-info-text,
+  #random-page,
+  #browse-page,
+  #random-list,
+  .information-list {
+    max-height: 14rem;
+  }
+}
+
+@media screen and (min-width: 812px) and (min-height: 375px) {
+  .container {
+    width: 812px;
+    min-height: 375px;
+  }
+
+  .slideshow-img {
+    margin-top: 2rem;
+    width: 80px;
+    height: 80px;
+  }
+
+  #recipe-img-div,
+  #info-page,
+  .liquor-info-text,
+  #random-page,
+  #browse-page,
+  #random-list,
+  .information-list,
+  .no-margin {
+    word-wrap: break-word;
+    overflow: auto;
+    max-height: 14rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    width: 1024px;
+    min-height: 768px;
+    font-size: 24px;
+  }
+
+  .slideshow-img {
+    margin-top: 10rem;
+    transform: scale(4);
+  }
+
+  #recipe-img-div,
+  #info-page,
+  .liquor-info-text,
+  #random-page,
+  #browse-page,
+  #random-list,
+  .information-list {
+    max-height: 30rem;
+    overflow-y: scroll;
+    line-height: 2rem;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .container {
+    width: 1500px;
+    min-height: 950px;
+    font-size: 24px;
+  }
+
+  .slideshow-img {
+    margin-top: 10rem;
+    transform: scale(4);
+  }
+
+  #recipe-img-div,
+  #info-page,
+  .liquor-info-text,
+  #random-page,
+  #browse-page,
+  #random-list,
+  .information-list {
+    max-height: 50rem;
+    overflow-y: scroll;
+  }
+
+  .liquor-info-text {
+    font-size: 1.4rem !important;
+  }
+}

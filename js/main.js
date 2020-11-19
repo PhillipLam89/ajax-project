@@ -1,4 +1,4 @@
-var xhr = new XMLHttpRequest();
+
 var interval = null;
 var count = 1;
 var $cocktails = document.querySelector('.cocktails-text');
@@ -20,6 +20,7 @@ var $recipeImgDiv = document.querySelector('#recipe-img-div');
 var $randomName = document.querySelector('#random-name');
 var $infoPage = document.querySelector('#info-page');
 var $dataPage = document.querySelector('#data-page');
+var $refreshButton = document.querySelector('.refresh');
 
 function random(min, max) { // gives random number between min-max (inclusive)  min = 0 (starting index)  max = allCocktails.length-1
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -89,37 +90,33 @@ function showInfoPage(event) {
     $errorhandler.classList.remove('hidden');
     $containerStatus.classList.add('hidden');
     $errorMsg.textContent = 'No Internet Connection Detected.';
-
   });
-
   xhr4.addEventListener('load', function () {
     if (xhr4.status !== 200) {
       $errorhandler.classList.remove('hidden');
       $containerStatus.classList.add('hidden');
-      $errorMsg.textContent = 'No data received from server.';
+      $errorMsg.textContent = 'No data available';
       return;
     }
-
     var data = xhr4.response;
     var $liquorInfoText = document.createElement('li');
     $liquorInfoText.className = 'liquor-info-text';
     $liquorInfoText.textContent = data.ingredients[0].strDescription;
     document.querySelector('.information-list').appendChild($liquorInfoText);
-
   });
   xhr4.send();
 }
 var $errorhandler = document.querySelector('.error-handler');
 var $containerStatus = document.querySelector('.container');
 var $errorMsg = document.querySelector('.error-msg');
+var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/popular.php');
 xhr.responseType = 'json';
-
+xhr.send();
 xhr.addEventListener('error', function () {
   $errorhandler.classList.remove('hidden');
   $containerStatus.classList.add('hidden');
   $errorMsg.textContent = 'No Internet Connection Detected.';
-
 });
 
 xhr.addEventListener('load', function () {
@@ -127,7 +124,7 @@ xhr.addEventListener('load', function () {
   if (xhr.status !== 200) {
     $errorhandler.classList.remove('hidden');
     $containerStatus.classList.add('hidden');
-    $errorMsg.textContent = 'No data received from server.';
+    $errorMsg.textContent = 'No data available';
     return;
   }
 
@@ -147,7 +144,6 @@ xhr.addEventListener('load', function () {
 
 var $recipeDiv = document.querySelector('#recipe-img-div');
 
-xhr.send();
 document.addEventListener('click', function (event) {
   if (event.target.className === 'fas fa-chevron-right right-arrow') {
     clearInterval(interval);
@@ -196,7 +192,7 @@ document.addEventListener('click', function (event) {
       if (xhr3.status !== 200) {
         $errorhandler.classList.remove('hidden');
         $containerStatus.classList.add('hidden');
-        $errorMsg.textContent = 'No data received from server.';
+        $errorMsg.textContent = 'No data available';
         return;
       }
       var randomData = xhr3.response;
@@ -252,14 +248,12 @@ document.addEventListener('click', function (event) {
     var $span = document.querySelectorAll('span');
     for (var i = 0; i < $span.length; i++) {
       $span[i].style = 'border: none'; // this allows the letter clicked to be underlined. Will clear all underlines first.
-
     }
     event.target.style = 'border-bottom: 3px solid black';
 
     var xhr2 = new XMLHttpRequest();
     xhr2.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/search.php?f=' + event.target.textContent);
     xhr2.responseType = 'json';
-
     xhr2.addEventListener('error', function () {
       $errorhandler.classList.remove('hidden');
       $containerStatus.classList.add('hidden');
@@ -267,7 +261,7 @@ document.addEventListener('click', function (event) {
 
     });
     xhr2.addEventListener('load', function () {
-      if (xhr.status !== 200) {
+      if (xhr2.status !== 200) {
         $errorhandler.classList.remove('hidden');
         $containerStatus.classList.add('hidden');
         $errorMsg.textContent = 'No data received from server.';
@@ -393,6 +387,27 @@ document.addEventListener('click', function (event) {
     document.querySelector('.information-list').textContent = '';
   } else if (event.target.className === 'liquors') {
     showInfoPage(event);
+  } else if (event.target.className === 'refresh') {
+    $errorhandler.classList.add('hidden');
+    $containerStatus.classList.remove('hidden');
+    $errorMsg.textContent = 'refreshing...';
+    $refreshButton.disabled = true;
+    xhr.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/popular.php');
+    xhr.responseType = 'json';
+    xhr.send();
+    xhr.addEventListener('load', function () {
+      if (xhr.status !== 200) {
+        $errorhandler.classList.remove('hidden');
+        $containerStatus.classList.add('hidden');
+        $errorMsg.textContent = 'No data available, please try again';
+
+      } else {
+        $refreshButton.disabled = false;
+        $errorhandler.classList.add('hidden');
+        $containerStatus.classList.remove('hidden');
+        $errorMsg.textContent = 'refreshing...';
+      }
+    });
   }
 });
 
@@ -409,7 +424,7 @@ xhr3.addEventListener('load', function () {
   if (xhr3.status !== 200) {
     $errorhandler.classList.remove('hidden');
     $containerStatus.classList.add('hidden');
-    $errorMsg.textContent = 'No data received from server.';
+    $errorMsg.textContent = 'No data available';
     return;
   }
   var randomData = xhr3.response;
