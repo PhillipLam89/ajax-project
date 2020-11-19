@@ -4,6 +4,7 @@
   border: 1px solid red;
   background-color: rgb(248, 245, 245);
   overflow: hidden;
+  margin-top: 0;
 }
 
 .hidden {
