@@ -1,4 +1,4 @@
-# ajax-project-template
+# Live Cocktail Reciped App
 
 ## 💰 Motivation
 
