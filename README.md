@@ -6,7 +6,8 @@ Click the following link to try it out live https://philliplam89.github.io/ajax-
 
 ##
 
- User can click a button which leads to a random cocktail recipe
+* Item 1
+* Item 2
 
 ## ✅ Task List
 
