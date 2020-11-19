@@ -4,17 +4,20 @@ A dynamic HTML, CSS, and JavaScript project that allows user to browse the world
 ## Application Demo
 Click the following link to try it out live https://philliplam89.github.io/ajax-project/
 
-##
+## Application Features
 
-* Item 1
-* Item 2
+* User can see the current top 20 cocktails worldwide (automatically updated weekly), displaying as a carousel
+* User can click on any cocktail images currently on display to see the recipe
+* User can browse all cocktails by letter alphabetically
+* User can click the random icon to be given a random cocktail recipe (over 1,200 cocktails available)
+* User can learn historical backgrounds about the most popular liquors used in cocktails 
 
-## ✅ Task List
+##  Possible future feature additions :
 
-- [x] request the whole list of cocktails via API
-- [x]  When the user clicks 'Random', show the random page and hide all other pages
-- [x] write a function to generate a random integer between 0 and the length of the drinks array
-- [x] use the return value of that function as the index in order to grab ingredients & instructions data from the data model
-- [x] When the user clicks "random" again, all previous content must be cleared and new content posted
-- [x] Allow user to click on rotating images/name on the home page so that it leads them to the recipe page for that particular image/name
+- [ ] User can search for cocktails by typing the name in the search bar
+- [ ] User can filter cocktails by liquor type (e.g., Vodka, Rum, etc.)
+- [ ] User can add their own custom-made cocktail to the API
+- [ ] User can see a cocktail's global rating out of 10 on its recipe page
+
+## Application Preview
 
