@@ -299,25 +299,25 @@ document.addEventListener('click', function (event) {
     $topHeader.textContent = $chosenCocktail.textContent;
 
     var index = null;
-    for (var m = 0; m < allCocktails.drinks.length; m++) {
-      if (allCocktails.drinks[m].strDrink === $chosenCocktail.textContent) {
+    for (var m = 0; m < dataForPopularCocktails.drinks.length; m++) {
+      if (dataForPopularCocktails.drinks[m].strDrink === $chosenCocktail.textContent) {
         index = m;
       }
     }
 
-    $recipeImgDiv.appendChild(createElement('img', { src: allCocktails.drinks[index].strDrinkThumb, class: 'slideshow-img2' }, ['']));
+    $recipeImgDiv.appendChild(createElement('img', { src: dataForPopularCocktails.drinks[index].strDrinkThumb, class: 'slideshow-img2' }, ['']));
     $recipeImgDiv.appendChild(createElement('h3', { class: '' }, ['Ingredients:']));
 
-    for (var val2 in allCocktails.drinks[index]) {
-      if (val2.indexOf('strIngredient') > -1 && allCocktails.drinks[index][val2] !== null) {
-        $recipeImgDiv.append(createElement('p', { class: 'no-margin' }, [allCocktails.drinks[index][val2]]));
+    for (var val2 in dataForPopularCocktails.drinks[index]) {
+      if (val2.indexOf('strIngredient') > -1 && dataForPopularCocktails.drinks[index][val2] !== null) {
+        $recipeImgDiv.append(createElement('p', { class: 'no-margin' }, [dataForPopularCocktails.drinks[index][val2]]));
       }
     }
 
     $recipeDiv.append(createElement('h2', { class: 'instructions' }, ['Instructions: ']));
-    for (var val3 in allCocktails.drinks[index]) {
-      if (val3 === 'strInstructions' && allCocktails.drinks[index][val3] !== null) {
-        $recipeDiv.append(createElement('p', { class: 'no-margin' }, [allCocktails.drinks[index][val3]]));
+    for (var val3 in dataForPopularCocktails.drinks[index]) {
+      if (val3 === 'strInstructions' && dataForPopularCocktails.drinks[index][val3] !== null) {
+        $recipeDiv.append(createElement('p', { class: 'no-margin' }, [dataForPopularCocktails.drinks[index][val3]]));
       }
     }
   } else if (event.target.id === 'info-icon' || event.target.id === 'info-img') {
