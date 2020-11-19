@@ -2,7 +2,7 @@
 var interval = null;
 var count = 1;
 var $cocktails = document.querySelector('.cocktails-text');
-var data2 = null;
+var dataForPopularCocktails = null;
 var $firstImg = document.querySelector('.first');
 var drinkList = null;
 var allCocktails = null;
@@ -21,6 +21,23 @@ var $randomName = document.querySelector('#random-name');
 var $infoPage = document.querySelector('#info-page');
 var $dataPage = document.querySelector('#data-page');
 var $refreshButton = document.querySelector('.refresh');
+var $recipeDiv = document.querySelector('#recipe-img-div');
+
+var $errorhandler = document.querySelector('.error-handler');
+var $containerStatus = document.querySelector('.container');
+var $errorMsg = document.querySelector('.error-msg');
+
+function createElement(tagName, attributes, children) { // attribute is object, children is an array
+  var $element = document.createElement(tagName);
+  for (var name in attributes) {
+    var value = attributes[name];
+    $element.setAttribute(name, value);
+  }
+  for (var i = 0; i < children.length; i++) {
+    $element.append(children[i]);
+  }
+  return $element;
+}
 
 function random(min, max) { // gives random number between min-max (inclusive)  min = 0 (starting index)  max = allCocktails.length-1
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -34,6 +51,28 @@ function showRandomPage() {
   $homeIcon.classList.remove('hidden');
   $infoPage.classList.add('hidden');
   $dataPage.classList.add('hidden');
+
+  $recipeDiv.innerHTML = ''; // clears previous content every time user clicks
+  var idx = random(0, allCocktails.drinks.length - 1); // this stores the index of the random cocktail to be used later to gather its info
+  $randomName.innerHTML = '';
+  $topHeader.textContent = 'Random Cocktail # ' + [idx + 1] + '-' + allCocktails.drinks[idx].strDrink;
+  $randomImageDiv.innerHTML = '';
+  $randomList.textContent = '';
+
+  $randomIngredients.appendChild(createElement('h2', { class: '' }, ['Ingredients: ']));
+  $randomImageDiv.appendChild(createElement('img', { src: allCocktails.drinks[idx].strDrinkThumb, class: 'slideshow-img2' }, ['']));
+
+  for (var value in allCocktails.drinks[idx]) {
+    if (value.indexOf('strIngredient') > -1 && allCocktails.drinks[idx][value] !== null) { // pulls data from all Ingredient properties that are NOT null
+      $randomList.appendChild(createElement('p', { class: 'no-margin' }, [allCocktails.drinks[idx][value]]));
+    }
+  }
+  $randomList.appendChild(createElement('h2', { class: 'instructions' }, ['Instructions: ']));
+  for (var randomIns in allCocktails.drinks[idx]) {
+    if (randomIns === 'strInstructions' && allCocktails.drinks[idx][randomIns] !== null) {
+      $randomList.appendChild(createElement('p', { class: 'no-margin' }, [allCocktails.drinks[idx][randomIns]]));
+    }
+  }
 }
 
 function showBrowsePage() {
@@ -106,32 +145,42 @@ function showInfoPage(event) {
   });
   xhr4.send();
 }
-var $errorhandler = document.querySelector('.error-handler');
-var $containerStatus = document.querySelector('.container');
-var $errorMsg = document.querySelector('.error-msg');
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/popular.php');
-xhr.responseType = 'json';
-xhr.send();
-xhr.addEventListener('error', function () {
-  $errorhandler.classList.remove('hidden');
-  $containerStatus.classList.add('hidden');
-  $errorMsg.textContent = 'No Internet Connection Detected.';
-});
 
-xhr.addEventListener('load', function () {
-
-  if (xhr.status !== 200) {
+var popularCocktailsURL = 'https://www.thecocktaildb.com/api/json/v2/9973533/popular.php';
+var allCocktailsURL = 'https://www.thecocktaildb.com/api/json/v2/9973533/search.php?s';
+function getJSON(target, headers, onLoad) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', target);
+  xhr.responseType = 'json';
+  for (var key in headers) {
+    var value = headers[key];
+    xhr.setRequestHeader(key, value);
+  }
+  xhr.addEventListener('error', function () {
     $errorhandler.classList.remove('hidden');
     $containerStatus.classList.add('hidden');
-    $errorMsg.textContent = 'No data available';
-    return;
-  }
+    $errorMsg.textContent = 'No Internet Connection Detected.';
+  });
+  xhr.addEventListener('load', function () {
+    onLoad(xhr.response);
+    if (xhr.status !== 200) {
+      $errorhandler.classList.remove('hidden');
+      $containerStatus.classList.add('hidden');
+      $errorMsg.textContent = 'No data available, please try again';
 
-  var data = xhr.response;
-  data2 = data;
+    } else {
+      $refreshButton.disabled = false;
+      $errorhandler.classList.add('hidden');
+      $containerStatus.classList.remove('hidden');
+    }
+  });
+  xhr.send();
+}
+// displays popular cocktails
+getJSON(popularCocktailsURL, null, function (data) {
+  dataForPopularCocktails = data; // global storage of data
   interval = setInterval(function () {
-    if (count === xhr.response.drinks.length) {
+    if (count === data.drinks.length) {
       count = 0;
     }
     $firstImg.setAttribute('src', data.drinks[count].strDrinkThumb);
@@ -142,103 +191,47 @@ xhr.addEventListener('load', function () {
   }, 1800);
 });
 
-var $recipeDiv = document.querySelector('#recipe-img-div');
-
 document.addEventListener('click', function (event) {
-  if (event.target.className === 'fas fa-chevron-right right-arrow') {
+  if (event.target.className === 'fas fa-chevron-right right-arrow') { // clicking right arrow displays next image and resets interval timer
     clearInterval(interval);
     count++;
-    if (count === xhr.response.drinks.length) {
+    if (count === dataForPopularCocktails.drinks.length) {
       count = 0;
     }
-    $firstImg.setAttribute('src', data2.drinks[count].strDrinkThumb);
-    $cocktails.textContent = data2.drinks[count].strDrink;
+    $firstImg.setAttribute('src', dataForPopularCocktails.drinks[count].strDrinkThumb);
+    $cocktails.textContent = dataForPopularCocktails.drinks[count].strDrink;
 
     interval = setInterval(function () {
-      if (count === xhr.response.drinks.length) {
+      if (count === dataForPopularCocktails.drinks.length) {
         count = 0;
       }
-      $firstImg.setAttribute('src', data2.drinks[count].strDrinkThumb);
-      $cocktails.textContent = data2.drinks[count].strDrink;
+      $firstImg.setAttribute('src', dataForPopularCocktails.drinks[count].strDrinkThumb);
+      $cocktails.textContent = dataForPopularCocktails.drinks[count].strDrink;
 
       count++;
     }, 2000);
-  } else if (event.target.className === 'fas fa-chevron-left left-arrow') {
+  } else if (event.target.className === 'fas fa-chevron-left left-arrow') { // clicking left arrow displays previous image and resets interval timer
     clearInterval(interval);
     count--;
     if (count < 0) {
-      count = xhr.response.drinks.length - 1;
+      count = dataForPopularCocktails.drinks.length - 1;
     }
-    $firstImg.setAttribute('src', data2.drinks[count].strDrinkThumb);
-    $cocktails.textContent = data2.drinks[count].strDrink;
+    $firstImg.setAttribute('src', dataForPopularCocktails.drinks[count].strDrinkThumb);
+    $cocktails.textContent = dataForPopularCocktails.drinks[count].strDrink;
 
     interval = setInterval(function () {
-      if (count === xhr.response.drinks.length) {
+      if (count === dataForPopularCocktails.drinks.length) {
         count = 0;
       }
-      $firstImg.setAttribute('src', data2.drinks[count].strDrinkThumb);
-      $cocktails.textContent = data2.drinks[count].strDrink;
+      $firstImg.setAttribute('src', dataForPopularCocktails.drinks[count].strDrinkThumb);
+      $cocktails.textContent = dataForPopularCocktails.drinks[count].strDrink;
       count++;
     }, 2000);
   } else if (event.target.className === 'random-button' || event.target.id === 'random-icon' || event.target.className === 'icon-text random-text') {
-
-    xhr3.addEventListener('error', function () {
-      $errorhandler.classList.remove('hidden');
-      $containerStatus.classList.add('hidden');
-      $errorMsg.textContent = 'No Internet Connection Detected.';
-
+    getJSON(allCocktailsURL, null, function (allData) {
+      allCocktails = allData;
+      showRandomPage();
     });
-    xhr3.addEventListener('load', function () {
-      if (xhr3.status !== 200) {
-        $errorhandler.classList.remove('hidden');
-        $containerStatus.classList.add('hidden');
-        $errorMsg.textContent = 'No data available';
-        return;
-      }
-      var randomData = xhr3.response;
-      allCocktails = randomData;
-      xhr3.send();
-    });
-
-    showRandomPage();
-
-    $recipeDiv.innerHTML = '';
-    var idx = random(0, allCocktails.drinks.length - 1);
-    $randomName.innerHTML = '';
-    $topHeader.textContent = 'Random Cocktail # ' + [idx + 1] + '-' + allCocktails.drinks[idx].strDrink;
-    $randomImageDiv.innerHTML = '';
-    $randomList.textContent = '';
-
-    var $ingredients2 = document.createElement('h2');
-    $ingredients2.textContent = 'Ingredients: ';
-    $randomIngredients.appendChild($ingredients2);
-
-    var $imgRandom = document.createElement('img');
-    $imgRandom.className = 'slideshow-img2';
-    $imgRandom.setAttribute('src', allCocktails.drinks[idx].strDrinkThumb);
-    $randomImageDiv.appendChild($imgRandom);
-
-    for (var value in allCocktails.drinks[idx]) {
-      if (value.indexOf('strIngredient') > -1 && allCocktails.drinks[idx][value] !== null) {
-        var $p3 = document.createElement('p');
-        $p3.className = 'no-margin';
-        $p3.textContent = allCocktails.drinks[idx][value];
-        $randomList.appendChild($p3);
-      }
-    }
-    var $instructions2 = document.createElement('h2');
-    $instructions2.className = 'instructions';
-    $instructions2.textContent = 'Instructions: ';
-    $randomList.append($instructions2);
-    for (var randomIns in allCocktails.drinks[idx]) {
-      if (randomIns === 'strInstructions' && allCocktails.drinks[idx][randomIns] !== null) {
-        var $p4 = document.createElement('p');
-        $p4.className = 'no-margin';
-        $p4.textContent = allCocktails.drinks[idx][randomIns];
-        $randomList.appendChild($p4);
-      }
-    }
-
   } else if (event.target.className === 'icons browse' || event.target.id === 'browse-icon') {
     showBrowsePage();
 
@@ -251,24 +244,8 @@ document.addEventListener('click', function (event) {
     }
     event.target.style = 'border-bottom: 3px solid black';
 
-    var xhr2 = new XMLHttpRequest();
-    xhr2.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/search.php?f=' + event.target.textContent);
-    xhr2.responseType = 'json';
-    xhr2.addEventListener('error', function () {
-      $errorhandler.classList.remove('hidden');
-      $containerStatus.classList.add('hidden');
-      $errorMsg.textContent = 'No Internet Connection Detected.';
-
-    });
-    xhr2.addEventListener('load', function () {
-      if (xhr2.status !== 200) {
-        $errorhandler.classList.remove('hidden');
-        $containerStatus.classList.add('hidden');
-        $errorMsg.textContent = 'No data received from server.';
-        return;
-      }
-
-      drinkList = xhr2.response;
+    getJSON('https://www.thecocktaildb.com/api/json/v2/9973533/search.php?f=' + event.target.textContent, null, function (data) {
+      drinkList = data;
       $cocktailsLetter.textContent = event.target.textContent;
       $cocktailsLetter.setAttribute('class', 'cocktails-letter');
       $cocktailsLetter.classList.add('sticky');
@@ -278,57 +255,39 @@ document.addEventListener('click', function (event) {
       $recipeList.innerHTML = '';
       $recipeList.appendChild($ol);
 
-      if (drinkList.drinks === null) {
-        drinkList.drinks = [''];
-        var $li = document.createElement('li');
-        $li.setAttribute('class', 'no-recipes');
-        $li.textContent = 'SORRY but there are no recipes beginning with ' + event.target.textContent;
+      if (data.drinks === null) {
+        data.drinks = [''];
         document.querySelector('.sticky').classList.add('hidden');
-        $ol.appendChild($li);
+        $ol.appendChild(createElement('li', { class: 'no-recipes' }, ['SORRY but there are no recipes beginning with ' + event.target.textContent]));
       }
-
       for (var j = 0; j < drinkList.drinks.length; j++) {
         var $li2 = document.createElement('li');
-        $li2.textContent = drinkList.drinks[j].strDrink;
+        $li2.textContent = data.drinks[j].strDrink;
         $li2.setAttribute('class', 'recipe-link');
         $ol.appendChild($li2);
       }
     });
-
-    xhr2.send();
   } else if (event.target.className === 'recipe-link') {
 
     showRecipePage();
 
     $topHeader.textContent = event.target.textContent;
-    var $img = document.createElement('img');
     var $ingredients = document.createElement('h2');
-
     $ingredients.textContent = 'Ingredients: ';
     for (var k = 0; k < drinkList.drinks.length; k++) {
       if (drinkList.drinks[k].strDrink === event.target.textContent) {
-        $img.setAttribute('src', drinkList.drinks[k].strDrinkThumb);
-        $img.className = 'slideshow-img2';
-        $recipeDiv.appendChild($img);
+        $recipeDiv.appendChild(createElement('img', { src: drinkList.drinks[k].strDrinkThumb, class: 'slideshow-img2' }, [''])); // creates and append image
         $recipeDiv.appendChild($ingredients);
+
         for (var val in drinkList.drinks[k]) {
           if (val.indexOf('strIngredient') > -1 && drinkList.drinks[k][val] !== null) { // returns all ingredients required, leaves out empty ones
-            var $p = document.createElement('p');
-            $p.className = 'no-margin';
-            $p.textContent = drinkList.drinks[k][val];
-            $recipeDiv.appendChild($p);
+            $recipeDiv.appendChild(createElement('p', { class: 'no-margin' }, [drinkList.drinks[k][val]]));
           }
         }
-        var $instructions = document.createElement('h2');
-        $instructions.className = 'instructions';
-        $instructions.textContent = 'Instructions: ';
-        $recipeDiv.append($instructions);
+        $recipeDiv.append(createElement('h2', { class: 'instructions' }, ['Instructions: ']));
         for (var ins in drinkList.drinks[k]) {
           if (ins === 'strInstructions' && drinkList.drinks[k][ins] !== null) {
-            var $p2 = document.createElement('p');
-            $p2.className = 'no-margin';
-            $p2.textContent = drinkList.drinks[k][ins];
-            $instructions.appendChild($p2);
+            $recipeDiv.append(createElement('p', { class: 'no-margin' }, [drinkList.drinks[k][ins]]));
           }
         }
       }
@@ -345,34 +304,20 @@ document.addEventListener('click', function (event) {
         index = m;
       }
     }
-    var $chosenImage = document.createElement('img');
-    $chosenImage.className = 'slideshow-img2';
-    $chosenImage.setAttribute('src', allCocktails.drinks[index].strDrinkThumb);
-    $recipeImgDiv.appendChild($chosenImage);
 
-    var $ingredients3 = document.createElement('h3');
-    $ingredients3.textContent = 'Ingredients:';
-    $recipeImgDiv.appendChild($ingredients3);
+    $recipeImgDiv.appendChild(createElement('img', { src: allCocktails.drinks[index].strDrinkThumb, class: 'slideshow-img2' }, ['']));
+    $recipeImgDiv.appendChild(createElement('h3', { class: '' }, ['Ingredients:']));
 
     for (var val2 in allCocktails.drinks[index]) {
       if (val2.indexOf('strIngredient') > -1 && allCocktails.drinks[index][val2] !== null) {
-        var $p5 = document.createElement('p');
-        $p5.className = 'no-margin';
-        $p5.textContent = allCocktails.drinks[index][val2];
-        $ingredients3.appendChild($p5);
+        $recipeImgDiv.append(createElement('p', { class: 'no-margin' }, [allCocktails.drinks[index][val2]]));
       }
     }
-    var $instructions3 = document.createElement('h2');
-    $instructions3.className = 'instructions';
-    $instructions3.textContent = 'Instructions: ';
-    $ingredients3.append($instructions3);
 
+    $recipeDiv.append(createElement('h2', { class: 'instructions' }, ['Instructions: ']));
     for (var val3 in allCocktails.drinks[index]) {
       if (val3 === 'strInstructions' && allCocktails.drinks[index][val3] !== null) {
-        var $p6 = document.createElement('p');
-        $p6.className = 'no-margin';
-        $p6.textContent = allCocktails.drinks[index][val3];
-        $instructions3.appendChild($p6);
+        $recipeDiv.append(createElement('p', { class: 'no-margin' }, [allCocktails.drinks[index][val3]]));
       }
     }
   } else if (event.target.id === 'info-icon' || event.target.id === 'info-img') {
@@ -392,43 +337,8 @@ document.addEventListener('click', function (event) {
     $containerStatus.classList.remove('hidden');
     $errorMsg.textContent = 'refreshing...';
     $refreshButton.disabled = true;
-    xhr.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/popular.php');
-    xhr.responseType = 'json';
-    xhr.send();
-    xhr.addEventListener('load', function () {
-      if (xhr.status !== 200) {
-        $errorhandler.classList.remove('hidden');
-        $containerStatus.classList.add('hidden');
-        $errorMsg.textContent = 'No data available, please try again';
-
-      } else {
-        $refreshButton.disabled = false;
-        $errorhandler.classList.add('hidden');
-        $containerStatus.classList.remove('hidden');
-        $errorMsg.textContent = 'refreshing...';
-      }
+    getJSON(popularCocktailsURL, null, function (data) {
+      dataForPopularCocktails = data;
     });
   }
 });
-
-var xhr3 = new XMLHttpRequest();
-xhr3.open('GET', 'https://www.thecocktaildb.com/api/json/v2/9973533/search.php?s');
-xhr3.responseType = 'json';
-xhr.addEventListener('error', function () {
-  $errorhandler.classList.remove('hidden');
-  $containerStatus.classList.add('hidden');
-  $errorMsg.textContent = 'No Internet Connection Detected.';
-
-});
-xhr3.addEventListener('load', function () {
-  if (xhr3.status !== 200) {
-    $errorhandler.classList.remove('hidden');
-    $containerStatus.classList.add('hidden');
-    $errorMsg.textContent = 'No data available';
-    return;
-  }
-  var randomData = xhr3.response;
-  allCocktails = randomData;
-
-});
-xhr3.send();
