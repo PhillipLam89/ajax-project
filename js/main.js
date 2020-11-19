@@ -38,8 +38,7 @@ function createElement(tagName, attributes, children) { // attribute is object, 
   }
   return $element;
 }
-
-function random(min, max) { // gives random number between min-max (inclusive)  min = 0 (starting index)  max = allCocktails.length-1
+function random(min, max) { // gives random number between min-max (inclusive)  min = 0 (starting index)  max =\allCocktails.length-1
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -188,7 +187,7 @@ getJSON(popularCocktailsURL, null, function (data) {
     $firstImg.className = 'slideshow-img';
 
     count++;
-  }, 1800);
+  }, 2800);
 });
 
 document.addEventListener('click', function (event) {
