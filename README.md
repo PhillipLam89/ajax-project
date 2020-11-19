@@ -21,3 +21,5 @@ Click the following link to try it out live https://philliplam89.github.io/ajax-
 
 ## Application Preview
 
+![GitHub Logo](/images/logo.png)
+Format: ![Alt Text](url)
