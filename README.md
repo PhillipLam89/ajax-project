@@ -20,6 +20,5 @@ Click the following link to try it out live https://philliplam89.github.io/ajax-
 - [ ] User can see a cocktail's global rating out of 10 on its recipe page
 
 ## Application Preview
-
-![GitHub Logo](/images/logo.png)
+![Image of Yaktocat](https://github.com/PhillipLam89/ajax-project/blob/master/images/home.png)
 Format: ![Alt Text](url)
