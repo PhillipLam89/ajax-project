@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+
+
+
+
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap" rel="stylesheet">
   <link
   rel="stylesheet"
@@ -25,15 +29,11 @@
       <i class="fas fa-chevron-right right-arrow"></i>
       <i class="fas fa-chevron-left left-arrow"></i>
       <h2>Most Popular Cocktails</h2>
-        <div class="slide-box">
-          <div class="slide-left">
-            <img class="slideshow-img first" src="https://www.thecocktaildb.com//images//media//drink//3z6xdi1589574603.jpg" alt="browse-logo">
-          </div>
+        <div class="home-page-content-container">
+          <img class="slideshow-img first" src="https://www.thecocktaildb.com//images//media//drink//3z6xdi1589574603.jpg" alt="browse-logo">
+          <div class="cocktails-text">Mojito</div>
         </div>
-      <div class="cocktails-text">Mojito</div>
-      <div>
-        <button class="random-button">Random Cocktail !</button>
-      </div>
+
     </main>
     <main id="random-page" class="hidden">
       <h3 id="random-name"></h3>
@@ -61,7 +61,6 @@
       <div id="cocktails-list">
         <h1 class="cocktails-letter"></h1>
         <div id="recipe-list">
-
         </div>
       </div>
     </main>
@@ -70,25 +69,26 @@
       </div>
     </main>
     <main id="info-page" class="hidden">
-      <h3 class="liquors">Rum</h3>
-      <h3 class="liquors">Brandy</h3>
-      <h3 class="liquors">Champagne</h3>
-      <h3 class="liquors">Whisky</h3>
-      <h3 class="liquors">Vodka</h3>
-      <h3 class="liquors">Bourbon</h3>
-      <h3 class="liquors">Gin</h3>
-      <h3 class="liquors">Tequila</h3>
-      <h3 class="liquors">Scotch</h3>
-      <h3 class="liquors">Cognac</h3>
+      <div class="liquor-names">
+        <h3 class="liquors">Rum</h3>
+        <h3 class="liquors">Brandy</h3>
+        <h3 class="liquors">Champagne</h3>
+        <h3 class="liquors">Whisky</h3>
+        <h3 class="liquors">Vodka</h3>
+        <h3 class="liquors">Bourbon</h3>
+        <h3 class="liquors">Gin</h3>
+        <h3 class="liquors">Tequila</h3>
+        <h3 class="liquors">Scotch</h3>
+        <h3 class="liquors">Cognac</h3>
+      </div>
     </main>
     <main id="data-page" class="hidden">
       <div id="data-div">
         <ol class="information-list">
-
         </ol>
       </div>
     </main>
-    <nav class="nav-bar bottom-nav">
+    <footer class="nav-bar bottom-nav">
       <div class="home-icon icons hidden" id="home-icon">
         <img class= "home-icon icons" src="images/home.png" alt="home-icon" width="40px" height="40px">
         <p  class="home-icon icons">Home</p>
@@ -105,7 +105,13 @@
         <img id="random-icon" src="images/random.png" alt="random-logo" width="40px" height="40px">
         <p class="icon-text random-text">Random</p>
       </div>
-    </nav>
+    </footer>
+  </div>
+  <div class="error-handler hidden">
+    <h2 class="error-msg"></h2>
+    <img src="images/loading.gif" class="error-img">
+    <div></div>
+    <button class="refresh">Refresh</button>
   </div>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
