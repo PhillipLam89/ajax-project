@@ -20,7 +20,7 @@ Click the following link to try it out live https://philliplam89.github.io/ajax-
 * User can see a cocktail's global rating out of 10 on its recipe page
 
 ## Application Preview
-![Image of Home Page](https://github.com/PhillipLam89/ajax-project/blob/issue-6-error-handling/images/demo1.png) ![Image of Liquor List](https://github.com/PhillipLam89/ajax-project/blob/issue-6-error-handling/images/demo2.png) ![Image of Random](https://github.com/PhillipLam89/ajax-project/blob/issue-6-error-handling/images/demo3.png) 
-![Image of Background](https://github.com/PhillipLam89/ajax-project/blob/issue-6-error-handling/images/demo4.png)
+![Image of Home Page](https://github.com/PhillipLam89/ajax-project/blob/master/images/demo1.png) ![Image of Liquor List](https://github.com/PhillipLam89/ajax-project/blob/master/images/demo2.png) ![Image of Random](https://github.com/PhillipLam89/ajax-project/blob/master/images/demo3.png) 
+![Image of Background](https://github.com/PhillipLam89/ajax-project/blob/master/images/demo4.png)
 
 
