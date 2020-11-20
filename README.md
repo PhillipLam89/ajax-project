@@ -1,4 +1,4 @@
-# Live Cocktail Reciped App
+# Live Cocktail Recipe App
 A dynamic HTML, CSS, and JavaScript project that allows user to browse the world's most popular cocktails, their recipes, and historical background.
 
 ## Application Demo
