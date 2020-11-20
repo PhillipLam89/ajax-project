@@ -155,7 +155,7 @@ body {
   #random-list,
   .information-list {
     max-height: 45rem;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 
   .no-margin {
@@ -226,7 +226,7 @@ body {
   #random-list,
   .information-list {
     max-height: 30rem;
-    overflow-y: scroll;
+    overflow-y: auto;
     line-height: 2rem;
   }
 }
@@ -258,7 +258,7 @@ body {
   #random-list,
   .information-list {
     max-height: 50rem;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 
   .liquor-info-text {
