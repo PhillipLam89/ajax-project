@@ -5,14 +5,12 @@ body {
 }
 
 body {
-  width: 100%;
   display: flex;
   flex-direction: column;
 }
 
 @media screen and (min-width: 320px) {
   .container {
-    width: 320px;
     min-height: 568px;
   }
 
@@ -38,13 +36,11 @@ body {
 
 @media screen and (min-width: 375px) and (min-height: 667px) {
   .container {
-    width: 375px;
     min-height: 667px;
   }
 
   .slideshow-img {
     margin-top: 4rem;
-    width: 250px;
     height: 200px;
   }
 
@@ -64,7 +60,6 @@ body {
 
 @media screen and (min-width: 375px) and (min-height: 812px) {
   .container {
-    width: 375px;
     min-height: 812px;
   }
 
@@ -101,12 +96,10 @@ body {
 
 @media screen and (min-width: 568px) {
   .container {
-    width: 568px;
     min-height: 320px;
   }
 
   .slideshow-img {
-    width: 80px;
     height: 80px;
     margin-top: 0.2rem;
   }
@@ -125,7 +118,6 @@ body {
 @media screen and (min-width: 667px) and (min-height: 375px) {
   .container {
     margin-top: 4rem;
-    width: 667px;
     min-height: 375px;
   }
 
@@ -145,7 +137,6 @@ body {
 
 @media screen and (min-width: 768px) {
   .container {
-    width: 768px;
     min-height: 1024px;
     font-size: 40px;
   }
@@ -176,7 +167,6 @@ body {
 
 @media screen and (min-width: 812px) {
   .container {
-    width: 812px;
     min-height: 375px;
   }
 
@@ -193,7 +183,6 @@ body {
 
 @media screen and (min-width: 812px) and (min-height: 375px) {
   .container {
-    width: 812px;
     min-height: 375px;
   }
 
@@ -219,7 +208,6 @@ body {
 
 @media screen and (min-width: 1024px) {
   .container {
-    width: 1024px;
     min-height: 768px;
     font-size: 24px;
   }
@@ -245,9 +233,15 @@ body {
 
 @media screen and (min-width: 1500px) {
   .container {
-    width: 1500px;
     min-height: 950px;
-    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 1.4rem !important;
+  }
+
+  .no-margin {
+    font-size: 1.5rem !important;
   }
 
   .slideshow-img {
